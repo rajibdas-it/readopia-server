@@ -1,8 +1,8 @@
-import express, { Application, Request, Response } from "express";
+import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import httpStatus from "http-status";
-import router from "./app/routes";
+import routes from "./app/routes";
 
 const app: Application = express();
 app.use(cors());
@@ -10,15 +10,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("api/v1", router);
+app.use("/api/v1/", routes);
 
 app.use(globalErrorHandler);
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Server work");
-});
+// app.get("/", (req: Request, res: Response) => {
+//   res.send("Server work");
+// });
 
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(httpStatus.NOT_FOUND).json({
     success: false,
     message: "not found",

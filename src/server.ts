@@ -13,7 +13,7 @@ let server: Server;
 async function dbConnect() {
   try {
     await mongoose.connect(database_url as string);
-    console.log("💕 database connected");
+    console.log("💕 Database Connected");
     app.listen(port, () => {
       console.log(`server running on port ${port}`);
     });
