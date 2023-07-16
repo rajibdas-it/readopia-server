@@ -10,6 +10,7 @@ const createBook: RequestHandler = async (req, res) => {
   res.status(httpStatus.OK).json({
     satusCode: httpStatus.OK,
     success: true,
+    message: "Book added successfully",
     data: result,
   });
 };
@@ -19,6 +20,7 @@ const getAllBook: RequestHandler = async (req, res) => {
   res.status(httpStatus.OK).json({
     statusCode: httpStatus.OK,
     success: true,
+    message: "Books retrive successfully",
     data: result,
   });
 };
@@ -34,14 +36,13 @@ const getSingleBook: RequestHandler = async (req, res) => {
 
 const updateBook: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const { email } = req.query;
   const { ...data } = req.body;
-  const result = await BookService.updateBook(id, email, data);
+  const result = await BookService.updateBook(id, data);
   res.status(httpStatus.OK).json({
     statusCode: httpStatus.OK,
     success: true,
     message: "Book update successfully",
-    data: "",
+    data: result,
   });
 };
 
