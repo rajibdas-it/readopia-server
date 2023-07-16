@@ -12,5 +12,7 @@ router.post(
 );
 router.get("/", BookController.getAllBook);
 router.get("/:id", BookController.getSingleBook);
+router.patch("/update-book/:id", BookController.updateBook);
+router.delete("/delete-book/:id", BookController.deleteBook);
 
 export const bookRoute = router;
