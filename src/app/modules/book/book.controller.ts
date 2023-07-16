@@ -18,7 +18,7 @@ const getAllBook: RequestHandler = async (req, res) => {
   const result = await BookService.getAllBooks();
   res.status(httpStatus.OK).json({
     statusCode: httpStatus.OK,
-    success: false,
+    success: true,
     data: result,
   });
 };
@@ -27,7 +27,7 @@ const getSingleBook: RequestHandler = async (req, res) => {
   const result = await BookService.getSingleBook(id);
   res.status(httpStatus.OK).json({
     statusCode: httpStatus.OK,
-    success: false,
+    success: true,
     data: result,
   });
 };
