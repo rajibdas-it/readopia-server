@@ -1,6 +1,9 @@
 import { RequestHandler } from "express";
 import httpStatus from "http-status";
 import { BookService } from "./book.service";
+import pick from "../../../shared/pick";
+import { bookFilterableField } from "./book.constant";
+import { paginationFields } from "../../../constant/paginationField";
 
 const createBook: RequestHandler = async (req, res) => {
   const { ...bookData } = req.body;
@@ -16,12 +19,16 @@ const createBook: RequestHandler = async (req, res) => {
 };
 
 const getAllBook: RequestHandler = async (req, res) => {
-  const result = await BookService.getAllBooks();
+  const filters = pick(req.query, bookFilterableField);
+  const paginationOptions = pick(req.query, paginationFields);
+  const result = await BookService.getAllBooks(filters, paginationOptions);
+
   res.status(httpStatus.OK).json({
-    statusCode: httpStatus.OK,
+    statusCode: 200,
     success: true,
-    message: "Books retrive successfully",
-    data: result,
+    message: "Books retrived successfully",
+    meta: result.meta,
+    data: result.data,
   });
 };
 const getSingleBook: RequestHandler = async (req, res) => {

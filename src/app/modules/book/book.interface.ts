@@ -7,3 +7,5 @@ export type IBook = {
   descriptions?: string;
   createdBy: string;
 };
+
+export type IBookFilter = { search?: string };
