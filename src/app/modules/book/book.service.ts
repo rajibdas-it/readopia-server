@@ -84,10 +84,16 @@ const deleteBook = async (id: string) => {
   return result;
 };
 
+const getAllGenreAndYear = async () => {
+  const result = await Book.find({}, { genre: 1, publicationYear: 1 });
+  return result;
+};
+
 export const BookService = {
   createBook,
   getAllBooks,
   getSingleBook,
   updateBook,
   deleteBook,
+  getAllGenreAndYear,
 };

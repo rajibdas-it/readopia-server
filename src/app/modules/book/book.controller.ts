@@ -20,6 +20,7 @@ const createBook: RequestHandler = async (req, res) => {
 
 const getAllBook: RequestHandler = async (req, res) => {
   const filters = pick(req.query, bookFilterableField);
+  console.log(filters);
   const paginationOptions = pick(req.query, paginationFields);
   const result = await BookService.getAllBooks(filters, paginationOptions);
 
@@ -64,10 +65,21 @@ const deleteBook: RequestHandler = async (req, res) => {
   });
 };
 
+const getAllGenreAndYear: RequestHandler = async (req, res) => {
+  const result = await BookService.getAllGenreAndYear();
+  res.status(httpStatus.OK).json({
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Publication year and genre retrived successfully",
+    data: result,
+  });
+};
+
 export const BookController = {
   createBook,
   getAllBook,
   getSingleBook,
   updateBook,
   deleteBook,
+  getAllGenreAndYear,
 };
